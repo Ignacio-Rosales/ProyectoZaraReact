@@ -1,0 +1,49 @@
+
+
+[
+  {
+    "id": 1,
+    "imagen": "https://fotos.perfil.com//2020/08/04/900/0/zara-10-modelos-de-zapatillas-996586.jpg",
+    "titulo": "Calzado para mujer",
+    "categoria": "Calzado",
+    "descripcion": "Producto A",
+    "precio": 1000,
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "imagen": "https://urbanluxurymarcas.com/wp-content/uploads/2022/08/URBAN_LUXURY-321-683x1024.jpg",
+    "titulo": "Remera para hombre ",
+    "categoria": "Remera",
+    "descripcion": "Producto B",
+    "precio": 1000,
+    "stock": 10
+  },
+  {
+    "id": 3,
+    "imagen" : "https://i.pinimg.com/736x/cb/42/89/cb42898663447e54dbc3ee6e51c1f00a.jpg",
+    "titulo": "Pantalon para hombre",
+    "categoria": "Pantalon",
+    "descripcion": "Producto C",
+    "precio": 1000,
+    "stock": 10
+  },
+  {
+    "id": 4,
+    "titulo": "Calzado para mujer ",
+    "imagen": "https://e00-telva.uecdn.es/assets/multimedia/imagenes/2022/02/07/16442361983203.jpg",
+    "categoria": "Calzado",
+    "descripcion": "Producto D",
+    "precio": 1000,
+    "stock": 10
+  },
+  {
+    "id": 5,
+    "imagen" : "https://urbanluxurymarcas.com/wp-content/uploads/2023/04/URBAN-ABR14773-scaled.webp",
+    "titulo": "Remera para hombre",
+    "categoria": "Remera",
+    "descripcion": "Producto E",
+    "precio": 1000,
+    "stock": 10
+  }
+]

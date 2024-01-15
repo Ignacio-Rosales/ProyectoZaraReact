@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom'
 
 const Item = ( {producto} ) => {
 
- 
-
   return (
     <SimpleGrid
       spacing={4}

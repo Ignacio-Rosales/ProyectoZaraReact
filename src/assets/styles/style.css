@@ -44,15 +44,14 @@
 
 .button-mid{
     border: 1px solid black;
+   
     
 }
 
-.card Button{
-
+.container_btn_itemCount{
     align-items: center;
     margin: 0 auto;
-    padding: 10px;
-    
+    padding: 10px; 
 }
 
 .imagen_item{

@@ -1,10 +1,27 @@
-import React from 'react'
-import { Card, CardHeader, CardBody, SimpleGrid, Heading, Text ,CardFooter, Button, Image} from '@chakra-ui/react'
+import React, { useContext } from 'react'
+import { Card, CardHeader, CardBody, SimpleGrid, Heading, Text ,CardFooter, Image} from '@chakra-ui/react'
 import ItemCount from './ItemCount';
-
+import { CartContext } from '../context/CartContext';
+import '../assets/styles/style.css'
 
 
 const ItemDetail = ( {item} ) => {
+
+  const {addToCart} = useContext(CartContext)
+
+  const handleBuyClick = (quantity) => {
+    //Aca creo un objeto con la info del producto y la cantidad
+    const productToAdd = {
+      name: item.titulo,
+      price: item.precio,
+      quantity: quantity
+    }
+
+    addToCart(productToAdd)
+  }
+
+
+
   return (
     <div className='card'>
     <SimpleGrid
@@ -30,9 +47,7 @@ const ItemDetail = ( {item} ) => {
           <Text>Stock: {item.stock}</Text>
         </CardBody>
         <CardFooter>
-          <Button>
-            <ItemCount />
-          </Button>
+          <ItemCount onBuyClick={handleBuyClick} />  
         </CardFooter>
       </Card>
       

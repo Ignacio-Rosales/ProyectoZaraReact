@@ -4,7 +4,7 @@ import { Button } from '@chakra-ui/react'
 import '../assets/styles/style.css'
 
 
-const ItemCount = () => {
+const ItemCount = ({onBuyClick}) => {
     const [count, setCount] = useState(0)
 
     const mostrarMensaje = () => {
@@ -25,14 +25,18 @@ const ItemCount = () => {
     }
 
 
+    const handleBuyClick = () => {
+      onBuyClick(count)
+      mostrarMensaje()
+    }
 
   return (
-    <div>
+    <div className='container_btn_itemCount'>
       <Button onClick={sumar}>+</Button>
-      <Button onClick={mostrarMensaje} className='button-mid'>Agregar al carrito {count}</Button>
+      <Button onClick={handleBuyClick} className='button-mid' >Agregar al carrito {count}</Button>
       <Button onClick={restar}> - </Button>
     </div>
-  );
+  )
 }
 
 export default ItemCount

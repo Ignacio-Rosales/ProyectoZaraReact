@@ -1,10 +1,15 @@
 import React from 'react'
-import { Stack, Spinner } from '@chakra-ui/react'
+import { Spinner, Flex } from '@chakra-ui/react'
 const Loader = () => {
   return (  
-    <Stack direction='row' spacing={4}>
-        <Spinner size='xl' />
-    </Stack>
+    <Flex 
+      height="100vh" 
+      alignItems="center" 
+      justifyContent="center"
+      className='container_loader'
+    >
+      <Spinner size='xl' className='loader' />
+    </Flex>
   )
 }
 

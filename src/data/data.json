@@ -8,7 +8,7 @@
     "categoria": "Calzado",
     "descripcion": "Producto A",
     "precio": 1000,
-    "stock": 10
+    "stock": 20
   },
   {
     "id": 2,
@@ -17,7 +17,7 @@
     "categoria": "Remera",
     "descripcion": "Producto B",
     "precio": 1000,
-    "stock": 10
+    "stock": 20
   },
   {
     "id": 3,
@@ -26,7 +26,7 @@
     "categoria": "Pantalon",
     "descripcion": "Producto C",
     "precio": 1000,
-    "stock": 10
+    "stock": 20
   },
   {
     "id": 4,
@@ -35,7 +35,7 @@
     "categoria": "Calzado",
     "descripcion": "Producto D",
     "precio": 1000,
-    "stock": 10
+    "stock": 20
   },
   {
     "id": 5,
@@ -44,7 +44,7 @@
     "categoria": "Remera",
     "descripcion": "Producto E",
     "precio": 1000,
-    "stock": 10
+    "stock": 20
   }
 ]
 

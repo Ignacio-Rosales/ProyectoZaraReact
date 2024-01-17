@@ -24,7 +24,6 @@ const Item = ( {producto} ) => {
 
         <Link to={`/item/${producto.id}`}>
         <CardFooter>
-          
               <Button className='ver-detalle'>Ver detalle</Button>
         </CardFooter>
           </Link>

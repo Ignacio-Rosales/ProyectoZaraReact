@@ -24,13 +24,16 @@ const Cart = () => {
           <p>El carrito esta vacio</p>
         ) : (
           <div>
-          <ul>
+          <ul className='container_ul'>
           {cart.map((item) => {
             total += item.price * item.quantity
             return (
-            <li key={item.id}>
-              {item.name} - Cantidad: {item.quantity} - Precio: ${item.price * item.quantity }
-              <button onClick={() => handleRemove(item.id)}>Eliminar</button>
+            <li key={item.id} >
+              <div className='container_img_cart'>
+                <img src={item.src} alt={item.name} className='img_cart' style={{ width: '50px', marginRight: '10px' }} />
+                {item.name} - Cantidad: {item.quantity} - Precio: ${item.price * item.quantity }
+                <button onClick={() => handleRemove(item.id)}>Eliminar</button>
+              </div>
             </li>
              )
         })}
@@ -38,7 +41,7 @@ const Cart = () => {
         <p>Total: ${total.toFixed(2)} </p>
         </div>
         )}
-         <button onClick={handleClear}>Vaciar Carrito</button>
+        { cart.length > 0 ? <button onClick={handleClear}>Vaciar Carrito</button> : ""}
          <br />
          <Link to={'/'}>
          <button>Volver al inicio</button>

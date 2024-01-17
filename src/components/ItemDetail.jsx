@@ -13,6 +13,7 @@ const ItemDetail = ( {item} ) => {
     //Aca creo un objeto con la info del producto y la cantidad
     const productToAdd = {
       id: item.id,
+      src: item.imagen,
       name: item.titulo,
       price: item.precio,
       quantity: quantity

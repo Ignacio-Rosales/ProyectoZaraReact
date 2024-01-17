@@ -9,7 +9,6 @@ export const CartContextProvider = ( {children}) => {
 
      const addToCart = (producto) => {
         setCart([...cart, producto])
-        
      }
 
      const removeFromCart = (productId) => {
@@ -21,7 +20,6 @@ export const CartContextProvider = ( {children}) => {
     }
 
    
-
     return(
         <CartContext.Provider value={{ cart, addToCart, removeFromCart, clearCart }}>
             {children}

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Button } from '@chakra-ui/react'
 import '../assets/styles/style.css'
-
+import { Link } from 'react-router-dom'
 
 const ItemCount = ({onBuyClick}) => {
     const [count, setCount] = useState(0)
@@ -35,7 +35,17 @@ const ItemCount = ({onBuyClick}) => {
       <Button onClick={sumar}>+</Button>
       <Button onClick={handleBuyClick} className='button-mid' >Agregar al carrito {count}</Button>
       <Button onClick={restar}> - </Button>
+
+      <br />
+      <Link to={'/'}>
+        <Button>
+          Volver al inicio
+        </Button>
+      </Link>
     </div>
+    
+     
+   
   )
 }
 

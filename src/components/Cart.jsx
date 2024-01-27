@@ -2,52 +2,107 @@ import React from 'react'
 import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import { Link } from 'react-router-dom'
+import { Card, Stack, Heading, CardFooter, Divider, Box, Button, Image, Text } from '@chakra-ui/react';
+
+
 
 const Cart = () => {
 
-  const { cart, removeFromCart, clearCart} = useContext(CartContext)
-  let total = 0
+  const {cart, setCart} = useContext(CartContext)
 
-  const handleRemove = (productId) => {
-    removeFromCart(productId)
-  }
+  const clearCart = () => {
+    setCart([])
+  };
 
- const handleClear = () =>{
-    clearCart()
- }
+  const deleteOne = (itemId) => {
+    const itemIndex = cart.findIndex((item) => item.id === itemId)
 
+    if (itemIndex !== -1) {
+      const newCart = [...cart]
+      newCart[itemIndex].stock--
+
+      if (newCart[itemIndex].stock === 0) {
+        newCart.splice(itemIndex, 1);
+      }
+      setCart(newCart)
+    }
+  };
+
+  const increaseOne = (itemId) => {
+    const itemIndex = cart.findIndex((item) => item.id === itemId)
+
+    if (itemIndex !== -1) {
+      const newCart = [...cart]
+      newCart[itemIndex].stock++
+
+      if (newCart[itemIndex].stock === 0) {
+        newCart.splice(itemIndex, 1)
+      }
+      setCart(newCart)
+    }
+  };
+
+  const totalPrice = () => {
+    if (!Array.isArray(cart)) {
+      return 0
+    } else {
+      return cart.reduce((acu, item) => acu + item.precio * item.stock, 0);
+  }}
 
   return (
+    
     <div>
-        <h2>Carrito de compras</h2>
-        {cart.length === 0 ? (
-          <p>El carrito esta vacio</p>
-        ) : (
-          <div>
-          <ul className='container_ul'>
-          {cart.map((item) => {
-            total += item.price * item.quantity
-            return (
-            <li key={item.id} >
-              <div className='container_img_cart'>
-                <img src={item.src} alt={item.name} className='img_cart' style={{ width: '50px', marginRight: '10px' }} />
-                {item.name} - Cantidad: {item.quantity} - Precio: ${item.price * item.quantity }
-                <button onClick={() => handleRemove(item.id)}>Eliminar</button>
-              </div>
-            </li>
-             )
-        })}
-        </ul>
-        <p>Total: ${total.toFixed(2)} </p>
-        </div>
-        )}
-        { cart.length > 0 ? <button onClick={handleClear}>Vaciar Carrito</button> : ""}
-         <br />
-         <Link to={'/'}>
-         <button>Volver al inicio</button>
-         </Link>
+      <Heading className="titulo_cart" mb={1}>
+        Carrito De Compras
+      </Heading>
+      <br />
+      <br />
+      {cart.map((item) => (
+        <Box key={item.id} w="100%">
+          <Divider mb={4} />
+          <Card>
+            <Box p={4} backgroundColor="#f1ecfd">
+              <Image src={item.imagen} alt={item.titulo} className="imagen_cart" />
+              <Stack spacing={4}>
+              <Heading >
+                  Titulo: {item.titulo}
+                </Heading>
+                <Heading size="md" className='precio_unitario'>
+                  Precio unitario: ${item.precio}.-
+                </Heading>
+                <Heading  size="md" className= "cantidad">
+                  Cantidad: {item.stock}
+                </Heading>
+              </Stack>
+              <CardFooter justifyContent="center" marginTop="50px">
+                <Button className= "btn-eliminar" onClick={() => deleteOne(item.id)}>
+                  Eliminar
+                </Button>
+                <Text className="texto_modificar_compra" ml={4}>
+                Modificar compra
+                </Text>
+                <Button className= "btn-agregar" onClick={() => increaseOne(item.id)} ml={4}>
+                  Agregar
+                </Button>
+              </CardFooter>
+            </Box>
+          </Card>
+          <Divider mt={4} />
+        </Box>
+      ))}
+      <Heading  size="xl" mt={4}>
+        Precio final: ${totalPrice()}.-
+      </Heading>
+      <Button mt={4} className="vaciar_carrito" onClick={clearCart}>
+        Vaciar Carrito
+      </Button>
+      <Link to="/Form">
+        <Button mt={4} className="confirmar_compra">
+          Confirmar compra
+        </Button>
+      </Link>
     </div>
-  )
-}
+  );
+};
 
 export default Cart

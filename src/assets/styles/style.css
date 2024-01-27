@@ -99,3 +99,71 @@ body,html{
 .container_ul{
     list-style-type: none;
 }
+
+.precio_unitario{
+    color: rgb(0, 0, 0);
+    
+}
+.cantidad{
+    color: rgb(0, 0, 0);
+}
+
+.btn-eliminar{
+    border: 1px solid black;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btn-eliminar:hover{
+    color: red;
+}
+
+.btn-agregar{
+    border: 1px solid black;
+    cursor: pointer;
+    transition: .5s;
+}
+.btn-agregar:hover{
+    color: green;
+}
+
+.texto_modificar_compra{
+    font-size: 25px;
+    text-align: center;
+    align-items: center;
+}
+
+.vaciar_carrito{
+   color: black;
+   border: 1px solid black;
+   margin: 0 15px;
+   cursor: pointer;
+   transition: .5s;
+}
+
+.vaciar_carrito:hover{
+    color: red;
+}
+
+.confirmar_compra{
+    color: black;
+    border: 1px solid black;
+    margin: 0 15px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.confirmar_compra:hover{
+    color: green;
+}
+
+.titulo_cart{
+    color: black;
+}
+
+.imagen_cart{
+    width: 300px;
+    height: 300px;
+    margin-right: auto;
+    margin-left: auto;
+}

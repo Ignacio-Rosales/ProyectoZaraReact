@@ -1,23 +1,28 @@
 import { React,  useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import {pedirDataId} from '../utils/pedirData'
 import ItemDetail from './ItemDetail'
+import { getFirestore, collection, getDocs} from "firebase/firestore"
 
 const ItemDetailContainer = () => {
 
-  const [ item, setItem ] = useState(null)
-  const { id } = useParams()
-
-    useEffect(() => {
-      pedirDataId(Number(id))
-      .then((res) => {
-        setItem(res)
-      })
-    }, [id])
+  const [ item, setItem ] = useState([])
+  
+  useEffect(() => {
+    
+    const db= getFirestore()
+    const itemsCollection = collection(db, "items")
+    getDocs(itemsCollection).then((querysnapshot) => {
+      const items = querysnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+      setItem(items)
+    })
+  },[])
+    
 
     return (
       <div>
-        {item && <ItemDetail item={item} />}
+        { <ItemDetail items={item} />}
       </div>
     )
 }

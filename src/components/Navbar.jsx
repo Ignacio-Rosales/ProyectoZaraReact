@@ -25,25 +25,23 @@ const Navbar = () => {
             <Portal>
               <MenuList>
                 <MenuItem>
-                  <Link to="/categoria/Calzado">
-                    <p>Calzado</p>
+                  <Link to="/category/calzados">
+                    <p>Calzados</p>
                   </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Link to="/categoria/Remera">
-                    <p>Remera</p>
-                  </Link>
+                  <Link to="/category/remeras">
+                    <p>Remeras</p>
+                  </Link> 
                 </MenuItem>
                 <MenuItem>
-                <Link to="/categoria/Pantalon">
+                <Link to="/category/pantalones">
                   <p>Pantalones</p>
                 </Link>
                 </MenuItem>
               </MenuList>
             </Portal>
           </Menu>
-
-         
 
           <CartWidget />
         </div>

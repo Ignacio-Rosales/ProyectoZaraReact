@@ -1,32 +1,50 @@
 import React, { useEffect, useState } from 'react'
 import '../assets/styles/style.css'
 import { useParams } from 'react-router-dom'
-import { pedirInfo } from '../utils/pedirData'
 import ItemList from './ItemList'
+import {collection, getDocs, getFirestore} from "firebase/firestore"
+import Loader from './Loader'
 
 
 
 const ItemListContainer = () => {
 
-    const [ productos, setProductos ] = useState([])
-    const { categoria } = useParams()
+    const [ items, setItems ] = useState([])
+    const { categoryId } = useParams()
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        pedirInfo()
-          .then((res) => {
-              if(categoria){
-                  setProductos(res.filter((prod) => prod.categoria === categoria))
-              }else{
-                  setProductos(res)
-              }
-        })
-    }, [categoria])
 
-  return (
-    <div>
-      <ItemList  productos = {productos} />
-    </div>
-  )
+        const fetchData = async () => {
+        const db = getFirestore()
+
+        const itemsCollection = collection(db, "items")
+        try{
+          const snapshot = await getDocs(itemsCollection)
+          const docs = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id:doc.id,
+        }))
+        setItems(docs)
+        setLoading(false)
+       } catch (error) {
+        console.log("Error obteniendo informacion:", error)
+       }
+      }
+      fetchData()
+      },[])
+
+
+      const filter = items.filter((item) => item.categoryId === categoryId);
+      if (loading === true) {
+        return <Loader />
+      } else {
+        return (
+          <div>
+            { categoryId ? <ItemList items={filter} /> : <ItemList items={items} />}
+          </div>
+        )
+      }
 }
 
 export default ItemListContainer

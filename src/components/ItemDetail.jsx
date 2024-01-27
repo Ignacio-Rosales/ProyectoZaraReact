@@ -1,36 +1,37 @@
-import React, { useContext } from 'react'
-import { Card, CardHeader, CardBody, SimpleGrid, Heading, Text ,CardFooter, Image} from '@chakra-ui/react'
-import ItemCount from './ItemCount';
-import { CartContext } from '../context/CartContext';
+import React, { useEffect, useState } from 'react'
+import { Container,Card, CardHeader, CardBody, Heading, Text ,CardFooter, Image} from '@chakra-ui/react'
 import '../assets/styles/style.css'
+import { useParams } from 'react-router-dom'
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
+import ItemCount from './ItemCount'
 
+const ItemDetail = ( {items} ) => {
 
-const ItemDetail = ( {item} ) => {
+  const { id } = useParams();
+  const [item, setItem] = useState([]);
+  
 
-  const {addToCart} = useContext(CartContext)
+  useEffect(() => {
+    const db = getFirestore();
+    const itemsRef = doc(db, "items", `${id}`);
 
-  const handleBuyClick = (quantity) => {
-    //Aca creo un objeto con la info del producto y la cantidad
-    const productToAdd = {
-      id: item.id,
-      src: item.imagen,
-      name: item.titulo,
-      price: item.precio,
-      quantity: quantity
-    }
+    getDoc(itemsRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        setItem(snapshot.data());
+      } else {
+        console.log("Error: No se encuentra el producto");
+      }
+    });
+  }, [id]);
 
-    addToCart(productToAdd)
-  }
-
-
+  
+  const itemFilter = items && items.filter((item) => item.id == id);
 
   return (
-    <div className='card'>
-    <SimpleGrid
-      spacing={4}
-      templateRows="repeat(auto-fill, minmax(300px, 1fr))"
-    >
-      
+    <Container maxW='xl' mt='8' className='card'> 
+      { itemFilter.map((item)=> (
+    
+      <div key={item.id}>
       <Card>
         <CardHeader>
           <Heading size="md"> {item.titulo} </Heading>
@@ -49,12 +50,18 @@ const ItemDetail = ( {item} ) => {
           <Text>Stock: {item.stock}</Text>
         </CardBody>
         <CardFooter>
-          <ItemCount onBuyClick={handleBuyClick} />  
+          <ItemCount 
+           id={item.id}
+           nombre={item.titulo}
+           precio={item.precio}
+           stock={item.stock}
+           item={item}
+           imagen={item.imagen} />  
         </CardFooter>
       </Card>
-      
-    </SimpleGrid>
-    </div>
+      </div>
+     ))}
+    </Container>
   );
 }
 

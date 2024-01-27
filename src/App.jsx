@@ -1,12 +1,12 @@
 import { useState, useEffect} from 'react'
+import CartContextProvider from './context/CartContext'
 import './App.css'
 import Navbar from './components/Navbar'
-import ItemListContainer from './components/ItemListContainer'
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import ItemListContainer from './components/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer'
 import Cart from './components/Cart'
 import Form from './components/Form'
-import CartContextProvider from './context/CartContext'
 import Loader from './components/Loader'
 
 
@@ -18,7 +18,7 @@ function App() {
 
   useEffect(()=> {
     setTimeout(()=>{
-      setProductos(["Producto A", "Producto B", "Producto C"])
+      setProductos([])
       setLoading(false)
     },5000)
   }, [])
@@ -29,22 +29,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <CartContextProvider>
+    <CartContextProvider>
         <Navbar />
         <Routes>
           
           <Route exact path="/" element={<ItemListContainer />} />
           <Route path="/item/:id" element={<ItemDetailContainer />} />
-          <Route path="/categoria/:categoria" element={<ItemListContainer />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/form" element={<Form />} />
+          <Route path="/category/:categoryId" element={<ItemListContainer />} />
+          <Route exact path="/cart" element={<Cart />} />
+          <Route exact path="/form" element={<Form />} />
         </Routes>
       
       {productos.map((p)=>{
         <li>{p}</li>
       })}
-      </CartContextProvider>
-    </BrowserRouter>
+    </CartContextProvider>
+      </BrowserRouter>
   );
 }
 
